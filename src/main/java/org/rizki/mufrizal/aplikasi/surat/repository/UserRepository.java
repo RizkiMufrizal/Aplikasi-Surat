@@ -1,9 +1,7 @@
 package org.rizki.mufrizal.aplikasi.surat.repository;
 
 import org.rizki.mufrizal.aplikasi.surat.domain.User;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
 
 /**
  * @Author Rizki Mufrizal <mufrizalrizki@gmail.com>
