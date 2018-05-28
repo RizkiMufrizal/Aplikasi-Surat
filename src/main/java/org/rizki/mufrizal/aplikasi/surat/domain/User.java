@@ -3,13 +3,7 @@ package org.rizki.mufrizal.aplikasi.surat.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -39,12 +33,9 @@ public class User {
 
     private String position;
 
-    @Column(name = "created_at", columnDefinition = "DATETIME")
-    private LocalDateTime createdAt;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "username"))
+    @Column(name = "roles")
+    private Set<String> roles;
 
-    @Column(name = "updated_at", columnDefinition = "DATETIME")
-    private LocalDateTime updatedAt;
-
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "user")
-    private Set<UserRole> userRoles;
 }

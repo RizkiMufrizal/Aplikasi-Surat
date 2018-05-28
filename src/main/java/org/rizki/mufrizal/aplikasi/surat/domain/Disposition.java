@@ -47,12 +47,6 @@ public class Disposition {
     @Column(name = "is_disposition")
     private boolean isDisposition;
 
-    @Column(name = "created_at", columnDefinition = "DATETIME")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", columnDefinition = "DATETIME")
-    private LocalDateTime updatedAt;
-
     @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_letter", nullable = false, foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private Letter letter;

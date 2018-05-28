@@ -56,12 +56,6 @@ public class Letter {
     @Column(name = "letter_upload")
     private String letterUpload;
 
-    @Column(name = "created_at", columnDefinition = "DATETIME")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", columnDefinition = "DATETIME")
-    private LocalDateTime updatedAt;
-
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "letter")
     private List<Disposition> dispositions;
 }
