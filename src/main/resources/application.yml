@@ -1,0 +1,26 @@
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/app_surat?autoReconnect=true
+        username: root
+        password:
+        poolName: SpringBootHikariCP
+        maximumPoolSize: 5
+        minimumIdle: 3
+        maxLifetime: 2000000
+        connectionTimeout: 30000
+        idleTimeout: 30000
+
+    jpa:
+        generate-ddl: true
+        show-sql: true
+        hibernate:
+            ddl-auto: validate
+        properties:
+            hibernate:
+                format_sql: true
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+    jackson:
+        serialization:
+            indent_output: true
