@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/stylesheet/sb-admin.min.css}" />
+</head>
+
+<body class="bg-dark">
+<div class="container">
+    <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+
+            <div th:if="${param.error}" id="error" style="text-align: center" class="alert alert-danger">
+                <a href="" class="close" data-dismiss="alert">
+                    &times;
+                </a>
+                <strong>Error</strong>
+                <p></p> Username Dan Password Salah
+            </div>
+
+            <div th:if="${param.logout}" id="logout" style="text-align: center" class="alert alert-success">
+                <a href="" class="close" data-dismiss="alert">
+                    &times;
+                </a>
+                <strong>Info</strong>
+                <p></p> Anda Berhasil LogOut
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input name="username" class="form-control" id="username" type="text" placeholder="Enter Username" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input name="password" class="form-control" id="password" type="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" /> Remember Password
+                        </label>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-block">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/jquery-easing/jquery.easing.js}" type="application/javascript"></script>
+<script type="application/javascript">
+    $.noConflict();
+    jQuery(document).ready(function() {
+        setTimeout(function() {
+            jQuery('#error').fadeOut('slow');
+        }, 3000);
+        setTimeout(function() {
+            jQuery('#logout').fadeOut('slow');
+        }, 3000);
+    });
+</script>
+</body>
+
+</html>
