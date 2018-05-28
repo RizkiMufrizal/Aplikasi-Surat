@@ -43,11 +43,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/stylesheet/**").permitAll()
+                .antMatchers("/login**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .loginPage("/login").permitAll()
                 .and()
                 .logout()
-                .deleteCookies("JSESSIONID");
+                .logoutSuccessUrl("/login?logout")
+                .deleteCookies("JSESSIONID")
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/login?error");
     }
 }
