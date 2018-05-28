@@ -15,12 +15,12 @@ CREATE TABLE tb_user_role (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=INNODB;
 
-CREATE TABLE id_letter (
+CREATE TABLE tb_letter (
     id_letter VARCHAR(36) NOT NULL,
     subject VARCHAR(30) NOT NULL,
     agenda_number VARCHAR(30) NOT NULL,
     letter_number VARCHAR(30) NOT NULL,
-    agenda_date TIMESTAMP WITH TIME ZONE NOT NULL,
+    agenda_date TIMESTAMP NOT NULL,
     description VARCHAR(30) NOT NULL,
     is_let_pass BIT(1) NOT NULL,
     letter_upload VARCHAR(30) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE id_letter (
 
 CREATE TABLE tb_disposition (
     id_disposition VARCHAR(36) NOT NULL,
-    disposition_date TIMESTAMP WITH TIME ZONE NOT NULL,
+    disposition_date TIMESTAMP NOT NULL,
     disposition_to VARCHAR(30) NOT NULL,
     is_disposition BIT(1) NOT NULL,
     id_letter VARCHAR(36) NOT NULL,
@@ -56,4 +56,4 @@ ALTER TABLE tb_user_role
 ADD CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES tb_user (username);
 
 ALTER TABLE tb_disposition
-ADD CONSTRAINT fk_id_letter FOREIGN KEY (id_letter) REFERENCES id_letter (id_letter);
+ADD CONSTRAINT fk_id_letter FOREIGN KEY (id_letter) REFERENCES tb_letter (id_letter);
