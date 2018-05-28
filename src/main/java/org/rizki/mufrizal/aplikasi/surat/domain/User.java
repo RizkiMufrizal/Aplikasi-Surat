@@ -2,6 +2,7 @@ package org.rizki.mufrizal.aplikasi.surat.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -38,4 +39,9 @@ public class User {
     @Column(name = "roles")
     private Set<String> roles;
 
+    @PrePersist
+    public void onPrePersist() {
+        this.setActive(Boolean.TRUE);
+        this.setPassword(new BCryptPasswordEncoder().encode(this.getPassword()));
+    }
 }
