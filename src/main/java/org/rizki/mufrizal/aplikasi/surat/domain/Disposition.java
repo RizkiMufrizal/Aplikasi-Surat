@@ -13,7 +13,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
@@ -44,10 +44,13 @@ public class Disposition {
     @Column(name = "disposition_to")
     private String dispositionTo;
 
+    @Column(name = "disposition_from")
+    private String dispositionFrom;
+
     @Column(name = "is_disposition")
     private boolean isDisposition;
 
-    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_letter", nullable = false, foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private Letter letter;
 }
