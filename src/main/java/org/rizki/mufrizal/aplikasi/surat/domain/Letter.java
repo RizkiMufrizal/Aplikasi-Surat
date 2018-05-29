@@ -44,8 +44,8 @@ public class Letter {
     @Column(name = "letter_number")
     private String letterNumber;
 
-    @Column(name = "agenda_date", columnDefinition = "DATETIME")
-    private LocalDateTime agendaDate;
+    @Column(name = "letter_date", columnDefinition = "DATETIME")
+    private LocalDateTime letterDate;
 
     @Column(name = "description")
     private String description;
