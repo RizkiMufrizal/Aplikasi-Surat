@@ -1,5 +1,6 @@
 package org.rizki.mufrizal.aplikasi.surat.controller;
 
+import org.rizki.mufrizal.aplikasi.surat.domain.Letter;
 import org.rizki.mufrizal.aplikasi.surat.dto.LetterDto;
 import org.rizki.mufrizal.aplikasi.surat.dto.mapper.LetterToDtoMapper;
 import org.rizki.mufrizal.aplikasi.surat.helper.upload.StorageFileNotFoundException;
@@ -47,12 +48,6 @@ public class LetterController {
         return "letter_income";
     }
 
-    @GetMapping(value = "/sendLetter")
-    public String letterSend(Model model) {
-        model.addAttribute("letter", letterService.findAllByLetPassIsFalse());
-        return "letter_send";
-    }
-
     @GetMapping(value = "/newIncomeLetter")
     public String incomeLetterNew(Model model) {
         model.addAttribute("letter", new LetterDto());
@@ -65,6 +60,68 @@ public class LetterController {
         letterDto.setLetterUpload(storageService.store(multipartFile));
         letterService.saveLetter(letterDtoToLetter.letterDtoToLetter(letterDto));
         return "redirect:/incomeLetter";
+    }
+
+    @GetMapping(value = "/editIncomeLetter/{idLetter}")
+    public String incomeLetterEdit(@PathVariable("idLetter") String idLetter, Model model) {
+        model.addAttribute("letter", letterDtoToLetter.letterToLetterDto(letterService.findById(idLetter).orElse(new Letter())));
+        return "letter_income_edit";
+    }
+
+    @PostMapping(value = "/editIncomeLetter")
+    public String incomeLetterUpdate(@ModelAttribute("letter") LetterDto letterDto) {
+        letterDto.setLetPass(Boolean.TRUE);
+        letterService.updateLetter(letterDtoToLetter.letterDtoToLetter(letterDto));
+        return "redirect:/incomeLetter";
+    }
+
+    @GetMapping(value = "/deleteIncomeLetter/{idLetter}")
+    public String incomeLetterDelete(@PathVariable("idLetter") String idLetter) {
+        Letter letter = letterService.findById(idLetter).orElse(new Letter());
+        letterService.deleteLetter(idLetter);
+        storageService.deleteFile(letter.getLetterUpload());
+        return "redirect:/incomeLetter";
+    }
+
+    @GetMapping(value = "/sendLetter")
+    public String letterSend(Model model) {
+        model.addAttribute("letter", letterService.findAllByLetPassIsFalse());
+        return "letter_send";
+    }
+
+    @GetMapping(value = "/newSendLetter")
+    public String sendLetterNew(Model model) {
+        model.addAttribute("letter", new LetterDto());
+        return "letter_send_new";
+    }
+
+    @PostMapping(value = "/newSendLetter")
+    public String sendLetterSave(@ModelAttribute("letter") LetterDto letterDto, @RequestParam("file") MultipartFile multipartFile) {
+        letterDto.setLetPass(Boolean.FALSE);
+        letterDto.setLetterUpload(storageService.store(multipartFile));
+        letterService.saveLetter(letterDtoToLetter.letterDtoToLetter(letterDto));
+        return "redirect:/sendLetter";
+    }
+
+    @GetMapping(value = "/editSendLetter/{idLetter}")
+    public String sendLetterEdit(@PathVariable("idLetter") String idLetter, Model model) {
+        model.addAttribute("letter", letterDtoToLetter.letterToLetterDto(letterService.findById(idLetter).orElse(new Letter())));
+        return "letter_send_edit";
+    }
+
+    @PostMapping(value = "/editSendLetter")
+    public String sendLetterUpdate(@ModelAttribute("letter") LetterDto letterDto) {
+        letterDto.setLetPass(Boolean.FALSE);
+        letterService.updateLetter(letterDtoToLetter.letterDtoToLetter(letterDto));
+        return "redirect:/sendLetter";
+    }
+
+    @GetMapping(value = "/deleteSendLetter/{idLetter}")
+    public String sendLetterDelete(@PathVariable("idLetter") String idLetter) {
+        Letter letter = letterService.findById(idLetter).orElse(new Letter());
+        letterService.deleteLetter(idLetter);
+        storageService.deleteFile(letter.getLetterUpload());
+        return "redirect:/sendLetter";
     }
 
     @GetMapping("/files/{filename:.+}")
