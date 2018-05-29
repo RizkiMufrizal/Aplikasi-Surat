@@ -21,4 +21,7 @@ public interface LetterToDtoMapper {
     @Mapping(target = "letterDate", qualifiedByName = {"StringToLocalDate", "toLocalDateTime"})
     Letter letterDtoToLetter(LetterDto letterDto);
 
+    @Mapping(target = "letterDate", qualifiedByName = {"StringToLocalDate", "toStringLocalDateTime"})
+    LetterDto letterToLetterDto(Letter letter);
+
 }
