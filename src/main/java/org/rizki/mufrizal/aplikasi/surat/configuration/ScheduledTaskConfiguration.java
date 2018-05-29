@@ -32,7 +32,7 @@ public class ScheduledTaskConfiguration {
         if (!userRepository.findById("admin").isPresent()) {
             User user = new User();
             user.setUsername("admin");
-            user.setPassword(new BCryptPasswordEncoder().encode("admin"));
+            user.setPassword("admin");
             user.setActive(Boolean.TRUE);
             user.setPosition("admin");
 
