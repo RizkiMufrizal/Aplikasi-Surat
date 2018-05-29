@@ -5,6 +5,7 @@ import org.rizki.mufrizal.aplikasi.surat.dto.LetterDto;
 import org.rizki.mufrizal.aplikasi.surat.dto.mapper.LetterToDtoMapper;
 import org.rizki.mufrizal.aplikasi.surat.helper.upload.StorageFileNotFoundException;
 import org.rizki.mufrizal.aplikasi.surat.helper.upload.StorageService;
+import org.rizki.mufrizal.aplikasi.surat.service.DispositionService;
 import org.rizki.mufrizal.aplikasi.surat.service.LetterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -42,6 +43,9 @@ public class LetterController {
     @Autowired
     private LetterToDtoMapper letterDtoToLetter;
 
+    @Autowired
+    private DispositionService dispositionService;
+
     @GetMapping(value = "/incomeLetter")
     public String letterIncome(Model model) {
         model.addAttribute("letter", letterService.findAllByLetPassIsTrue());
@@ -78,8 +82,10 @@ public class LetterController {
     @GetMapping(value = "/deleteIncomeLetter/{idLetter}")
     public String incomeLetterDelete(@PathVariable("idLetter") String idLetter) {
         Letter letter = letterService.findById(idLetter).orElse(new Letter());
-        letterService.deleteLetter(idLetter);
-        storageService.deleteFile(letter.getLetterUpload());
+        if (!dispositionService.findById(letter.getDisposition().getIdDisposition()).isPresent()) {
+            letterService.deleteLetter(idLetter);
+            storageService.deleteFile(letter.getLetterUpload());
+        }
         return "redirect:/incomeLetter";
     }
 
@@ -119,8 +125,10 @@ public class LetterController {
     @GetMapping(value = "/deleteSendLetter/{idLetter}")
     public String sendLetterDelete(@PathVariable("idLetter") String idLetter) {
         Letter letter = letterService.findById(idLetter).orElse(new Letter());
-        letterService.deleteLetter(idLetter);
-        storageService.deleteFile(letter.getLetterUpload());
+        if (!dispositionService.findById(letter.getDisposition().getIdDisposition()).isPresent()) {
+            letterService.deleteLetter(idLetter);
+            storageService.deleteFile(letter.getLetterUpload());
+        }
         return "redirect:/sendLetter";
     }
 
