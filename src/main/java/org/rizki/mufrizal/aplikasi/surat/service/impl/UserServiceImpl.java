@@ -4,6 +4,7 @@ import org.rizki.mufrizal.aplikasi.surat.domain.User;
 import org.rizki.mufrizal.aplikasi.surat.repository.UserRepository;
 import org.rizki.mufrizal.aplikasi.surat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,13 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void updateUser(User user) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        User userOld = userRepository.findById(user.getUsername()).orElse(user);
+        if (!userOld.getPassword().equals(user.getPassword())) {
+            if (!bCryptPasswordEncoder.matches(user.getPassword(), userOld.getPassword())) {
+                user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            }
+        }
         userRepository.save(user);
     }
 
