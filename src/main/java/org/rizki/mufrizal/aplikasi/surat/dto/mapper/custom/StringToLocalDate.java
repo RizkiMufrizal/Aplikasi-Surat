@@ -24,4 +24,9 @@ public class StringToLocalDate {
         return DateFormatterHelper.fromStringToLocalDateTime(letterDate, "yyyy-MM-dd HH:mm:ss");
     }
 
+    @Named("toStringLocalDateTime")
+    public LocalDateTime toStringLocalDateTime(LocalDateTime localDateTime) {
+        return DateFormatterHelper.fromStringToLocalDateTime(localDateTime.toString(), "yyyy-MM-dd HH:mm:ss");
+    }
+
 }
