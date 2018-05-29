@@ -65,11 +65,14 @@
                             <td th:text="${l.description}"></td>
                             <td th:text="${l.letterUpload}"></td>
                             <td class="text-center">
-                                <a th:href="@{/editUsers/{username}(username=${l.idLetter})}">
+                                <a th:href="@{/editIncomeLetter/{idLetter}(idLetter=${l.idLetter})}">
                                     <button type="button" class="btn btn-success btn-sm">Ubah</button>
                                 </a>
-                                <a th:href="@{/deleteUsers/{username}(username=${l.idLetter})}">
+                                <a th:href="@{/deleteIncomeLetter/{idLetter}(idLetter=${l.idLetter})}">
                                     <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                                </a>
+                                <a th:href="@{/files/{letterUpload}(letterUpload=${l.letterUpload})}" target="_blank">
+                                    <button type="button" class="btn btn-info btn-sm">Lihat</button>
                                 </a>
                             </td>
                         </tr>
