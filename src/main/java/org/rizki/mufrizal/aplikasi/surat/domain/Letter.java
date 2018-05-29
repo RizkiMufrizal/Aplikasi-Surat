@@ -10,10 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @Author Rizki Mufrizal <mufrizalrizki@gmail.com>
@@ -56,6 +55,6 @@ public class Letter {
     @Column(name = "letter_upload")
     private String letterUpload;
 
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "letter")
-    private List<Disposition> dispositions;
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "letter")
+    private Disposition disposition;
 }
