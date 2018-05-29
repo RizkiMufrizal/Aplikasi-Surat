@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Tambah Pengguna</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-multiselect/css/bootstrap-multiselect.css}"/>
+    <link rel="stylesheet" th:href="@{/stylesheet/bootstrap-datetimepicker.min.css}"/>
+    <link rel="stylesheet" th:href="@{/stylesheet/sb-admin.min.css}"/>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
+<div th:replace="Navbar :: navbar"></div>
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/dispositions}">Data Disposisi</a>
+            </li>
+            <li class="breadcrumb-item active">Tambah Disposisi</li>
+        </ol>
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Tambah Disposisi
+            </div>
+            <div class="card-body">
+                <form th:object="${disposition}" th:action="@{/newDisposition}" method="post">
+                    <div class="form-group">
+                        <label>Tanggal Disposisi</label>
+                        <input th:field="*{dispositionDate}" id="datetimepicker" type="text" class="form-control" placeholder="Masukkan Tanggal Disposisi">
+                    </div>
+                    <div class="form-group">
+                        <label>Disposisi Kepada</label>
+                        <select th:field="*{dispositionTo}" class="form-control">
+                            <option th:each="r : ${user}" th:value="${r.username}" th:text="${r.username}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Pilih Surat</label>
+                        <select th:field="*{letterDto}" class="form-control">
+                            <option th:each="r : ${letter}" th:value="${r.idLetter}" th:text="${r.subject + ' ' + r.letterNumber}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="text-center">
+                <small>Copyright © Your Website 2018</small>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/momentjs/min/moment.min.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/jquery-easing/jquery.easing.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/bootstrap-multiselect/js/bootstrap-multiselect.js}" type="application/javascript"></script>
+<script th:src="@{/script/bootstrap-datetimepicker.min.js}" type="application/javascript"></script>
+<script th:src="@{/script/sb-admin.min.js}" type="application/javascript"></script>
+<script th:src="@{/script/sb-admin-select.js}" type="application/javascript"></script>
+<script th:src="@{/script/sb-admin-datetime.js}" type="application/javascript"></script>
+</body>
+</html>

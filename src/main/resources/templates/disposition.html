@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Data Disposisi</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/datatables/css/dataTables.bootstrap4.min.css}"/>
+    <link rel="stylesheet" th:href="@{/stylesheet/sb-admin.min.css}"/>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
+<div th:replace="Navbar :: navbar"></div>
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Data Disposisi</li>
+        </ol>
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Data Disposisi
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <a th:href="@{/newDisposition}">
+                        <button type="button" class="btn btn-primary btn-sm">Tambah</button>
+                    </a>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Tanggal Disposisi</th>
+                            <th>Disposisi Dari</th>
+                            <th>Disposisi Kepada</th>
+                            <th>Status Disposisi</th>
+                            <th>Aksi</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Tanggal Disposisi</th>
+                            <th>Disposisi Dari</th>
+                            <th>Disposisi Kepada</th>
+                            <th>Status Disposisi</th>
+                            <th>Aksi</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        <tr th:each="d,x : ${disposition}">
+                            <td th:text="${d.dispositionDate}"></td>
+                            <td th:text="${d.dispositionFrom}"></td>
+                            <td th:text="${d.dispositionTo}"></td>
+                            <td th:text="${d.isDisposition()}"></td>
+                            <td class="text-center">
+                                <a th:href="@{/editUsers/{idDisposition}(idDisposition=${d.idDisposition})}">
+                                    <button type="button" class="btn btn-success btn-sm">Ubah</button>
+                                </a>
+                                <a th:href="@{/deleteUsers/{idDisposition}(idDisposition=${d.idDisposition})}">
+                                    <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="text-center">
+                <small>Copyright © Your Website 2018</small>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/jquery-easing/jquery.easing.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/datatables/js/jquery.dataTables.min.js}" type="application/javascript"></script>
+<script th:src="@{/webjars/datatables/js/dataTables.bootstrap4.min.js}" type="application/javascript"></script>
+<script th:src="@{/script/sb-admin.min.js}" type="application/javascript"></script>
+<script th:src="@{/script/sb-admin-datatables.js}" type="application/javascript"></script>
+</body>
+</html>
