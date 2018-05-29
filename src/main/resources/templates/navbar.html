@@ -19,6 +19,21 @@
                     <span class="nav-link-text">Data Pengguna</span>
                 </a>
             </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
+                   data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-angle-down"></i>
+                    <span class="nav-link-text">Surat</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseComponents">
+                    <li>
+                        <a th:href="@{/incomeLetter}">Surat Masuk</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/sendLetter}">Surat Keluar</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
