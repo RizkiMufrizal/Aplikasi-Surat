@@ -59,8 +59,12 @@
                             <td th:text="${u.position}"></td>
                             <td th:text="${u.roles}"></td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-success btn-sm">Ubah</button>
-                                <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                                <a th:href="@{/editUsers/{username}(username=${u.username})}">
+                                    <button type="button" class="btn btn-success btn-sm">Ubah</button>
+                                </a>
+                                <a th:href="@{/deleteUsers/{username}(username=${u.username})}">
+                                    <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                                </a>
                             </td>
                         </tr>
                         </tbody>
