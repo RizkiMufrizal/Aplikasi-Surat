@@ -47,7 +47,9 @@ public class UserController {
 
     @GetMapping(value = "/editUsers/{username}")
     public String userEdit(@PathVariable("username") String username, Model model) {
-        model.addAttribute("user", userService.findById(username));
+        System.out.println("cek " + userService.findById(username).get().getPassword());
+        model.addAttribute("user", userService.findById(username).orElse(new User()));
+        model.addAttribute("roles", SetOfRoles.getRoles());
         return "user_edit";
     }
 
