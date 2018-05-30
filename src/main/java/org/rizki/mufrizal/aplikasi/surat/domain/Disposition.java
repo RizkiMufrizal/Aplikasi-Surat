@@ -50,7 +50,7 @@ public class Disposition {
     @Column(name = "is_disposition")
     private boolean isDisposition;
 
-    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_letter", nullable = false, foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private Letter letter;
 }
