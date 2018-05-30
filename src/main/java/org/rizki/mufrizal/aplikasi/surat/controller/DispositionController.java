@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -62,6 +63,31 @@ public class DispositionController {
         Disposition disposition = dispositionToDtoMapper.dispositionDtoToDisposition(dispositionDto);
         disposition.setLetter(letterService.findById(dispositionDto.getLetterDto()).orElse(new Letter()));
         dispositionService.saveDisposition(disposition);
+        return "redirect:/dispositions";
+    }
+
+    @GetMapping(value = "/editDisposition/{idDisposition}")
+    public String dispositionEdit(@PathVariable("idDisposition") String idDisposition, Model model) {
+        model.addAttribute("disposition", dispositionToDtoMapper.dispositionToDispositionDto(dispositionService.findById(idDisposition).orElse(new Disposition())));
+        model.addAttribute("letter", letterService.findAllByLetPassIsTrue());
+        model.addAttribute("user", userService.findAll());
+        return "disposition_edit";
+    }
+
+    @PostMapping(value = "/editDisposition")
+    public String dispositionUpdate(@ModelAttribute("disposition") DispositionDto dispositionDto) {
+        dispositionDto.setDispositionFrom(authenticationSessionFacade.getUsername());
+        Disposition dispositionFromDB = dispositionService.findById(dispositionDto.getIdDisposition()).orElse(new Disposition());
+        Disposition disposition = dispositionToDtoMapper.dispositionDtoToDisposition(dispositionDto);
+        disposition.setDisposition(dispositionFromDB.isDisposition());
+        disposition.setLetter(letterService.findById(dispositionDto.getLetterDto()).orElse(new Letter()));
+        dispositionService.updateDisposition(disposition);
+        return "redirect:/dispositions";
+    }
+
+    @GetMapping(value = "/deleteDisposition/{idDisposition}")
+    public String dispositionDelete(@PathVariable("idDisposition") String idDisposition) {
+        dispositionService.deleteDisposition(idDisposition);
         return "redirect:/dispositions";
     }
 }

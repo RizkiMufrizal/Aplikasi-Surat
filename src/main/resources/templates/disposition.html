@@ -59,10 +59,10 @@
                             <td th:text="${d.dispositionTo}"></td>
                             <td th:text="${d.isDisposition()}"></td>
                             <td class="text-center">
-                                <a th:href="@{/editUsers/{idDisposition}(idDisposition=${d.idDisposition})}">
+                                <a th:href="@{/editDisposition/{idDisposition}(idDisposition=${d.idDisposition})}">
                                     <button type="button" class="btn btn-success btn-sm">Ubah</button>
                                 </a>
-                                <a th:href="@{/deleteUsers/{idDisposition}(idDisposition=${d.idDisposition})}">
+                                <a th:href="@{/deleteDisposition/{idDisposition}(idDisposition=${d.idDisposition})}">
                                     <button type="button" class="btn btn-danger btn-sm">Hapus</button>
                                 </a>
                             </td>
