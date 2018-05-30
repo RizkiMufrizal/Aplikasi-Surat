@@ -59,7 +59,10 @@
                             <td th:text="${d.dispositionDate}"></td>
                             <td th:text="${d.dispositionFrom}"></td>
                             <td th:text="${d.dispositionTo}"></td>
-                            <td th:text="${d.isDisposition()}"></td>
+                            <td>
+                                <span th:if="${d.isDisposition() == true}">Selesai</span>
+                                <span th:if="${d.isDisposition() == false}">Belum Selesai</span>
+                            </td>
                             <td th:text="${d.letter.subject}"></td>
                             <td class="text-center">
                                 <a th:href="@{/editDisposition/{idDisposition}(idDisposition=${d.idDisposition})}">
