@@ -25,3 +25,4 @@
 /.nb-gradle/
 
 upload-dir/
+.DS_Store
