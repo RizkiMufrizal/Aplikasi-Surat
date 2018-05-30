@@ -17,7 +17,7 @@ public class SetOfRoles {
         Set<String> stringSet = new HashSet<>();
         stringSet.add("ROLE_ADMIN");
         stringSet.add("ROLE_PIMPINAN");
-        stringSet.add("KEPALA_BAGIAN");
+        stringSet.add("ROLE_KEPALA_BAGIAN");
         return stringSet;
     }
 }

@@ -13,7 +13,7 @@
                     <span class="nav-link-text">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link" th:href="@{/users}">
                     <i class="fas fa-users"></i>
                     <span class="nav-link-text">Data Pengguna</span>
@@ -26,15 +26,22 @@
                     <span class="nav-link-text">Surat</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
-                    <li>
+                    <li sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_PIMPINAN')">
                         <a th:href="@{/incomeLetter}">Surat Masuk</a>
                     </li>
-                    <li>
+                    <li sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_PIMPINAN')">
+                        <a th:href="@{/sendLetter}">Surat Keluar</a>
+                    </li>
+
+                    <li sec:authorize="hasRole('ROLE_KEPALA_BAGIAN')">
+                        <a th:href="@{/incomeLetter}">Surat Masuk</a>
+                    </li>
+                    <li sec:authorize="hasRole('ROLE_KEPALA_BAGIAN')">
                         <a th:href="@{/sendLetter}">Surat Keluar</a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <li sec:authorize="hasRole('ROLE_PIMPINAN')" class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link" th:href="@{/dispositions}">
                     <i class="fas fa-table"></i>
                     <span class="nav-link-text">Data Disposisi</span>
@@ -60,6 +67,11 @@
               </span>
                     </div>
                 </form>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">
+                    Hi <span sec:authentication="name"></span>
+                </span>
             </li>
             <li class="nav-item">
                 <form class="form-inline" method="post" th:action="@{/logout}">
