@@ -65,15 +65,27 @@
                             <td th:text="${l.description}"></td>
                             <td th:text="${l.letterUpload}"></td>
                             <td class="text-center">
-                                <a th:href="@{/editIncomeLetter/{idLetter}(idLetter=${l.idLetter})}" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{/editIncomeLetter/{idLetter}(idLetter=${l.idLetter})}"
+                                   sec:authorize="hasRole('ROLE_ADMIN')">
                                     <button type="button" class="btn btn-success btn-sm">Ubah</button>
                                 </a>
-                                <a th:href="@{/deleteIncomeLetter/{idLetter}(idLetter=${l.idLetter})}" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{/deleteIncomeLetter/{idLetter}(idLetter=${l.idLetter})}"
+                                   sec:authorize="hasRole('ROLE_ADMIN')">
                                     <button type="button" class="btn btn-danger btn-sm">Hapus</button>
                                 </a>
-                                <a th:href="@{/files/{letterUpload}(letterUpload=${l.letterUpload})}" target="_blank" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_PIMPINAN','ROLE_KEPALA_BAGIAN')">
+                                <a th:href="@{/files/{letterUpload}(letterUpload=${l.letterUpload})}" target="_blank"
+                                   sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_PIMPINAN','ROLE_KEPALA_BAGIAN')">
                                     <button type="button" class="btn btn-info btn-sm">Lihat</button>
                                 </a>
+                                <a th:href="@{/updateIsDisposition/{idDisposition}(idDisposition=${l.disposition.idDisposition})}"
+                                   sec:authorize="hasAnyRole('ROLE_KEPALA_BAGIAN')"
+                                   th:if="${l.disposition.isDisposition() == false}">
+                                    <button type="button" class="btn btn-primary btn-sm">Proses Surat</button>
+                                </a>
+                                <button sec:authorize="hasAnyRole('ROLE_KEPALA_BAGIAN')"
+                                        th:if="${l.disposition.isDisposition() == true}" type="button"
+                                        class="btn btn-primary btn-sm disabled">Proses Surat
+                                </button>
                             </td>
                         </tr>
                         </tbody>

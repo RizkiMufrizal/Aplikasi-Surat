@@ -23,4 +23,6 @@ public interface DispositionService {
     Optional<Disposition> findById(String idDisposition);
 
     Iterable<Disposition> findAll();
+
+    void updateIsDisposition(Boolean isDisposition, String idDisposition);
 }

@@ -52,4 +52,12 @@ public class DispositionServiceImpl implements DispositionService {
     public Iterable<Disposition> findAll() {
         return dispositionRepository.findAll();
     }
+
+    @Transactional
+    @Override
+    public void updateIsDisposition(Boolean isDisposition, String idDisposition) {
+        Disposition disposition = dispositionRepository.findById(idDisposition).orElse(new Disposition());
+        disposition.setDisposition(isDisposition);
+        dispositionRepository.save(disposition);
+    }
 }

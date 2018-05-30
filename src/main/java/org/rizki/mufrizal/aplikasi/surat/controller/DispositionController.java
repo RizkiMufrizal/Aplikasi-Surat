@@ -91,4 +91,10 @@ public class DispositionController {
         dispositionService.deleteDisposition(idDisposition);
         return "redirect:/dispositions";
     }
+
+    @GetMapping(value = "/updateIsDisposition/{idDisposition}")
+    public String updateIsDisposition(@PathVariable("idDisposition") String idDisposition) {
+        dispositionService.updateIsDisposition(Boolean.TRUE, idDisposition);
+        return "redirect:/incomeLetterHead";
+    }
 }
