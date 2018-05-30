@@ -57,4 +57,9 @@ public class LetterServiceImpl implements LetterService {
     public Iterable<Letter> findAllByLetPassIsFalse() {
         return letterRepository.findAllByIsLetPassIsFalse();
     }
+
+    @Override
+    public Iterable<Letter> findAllByDisposition_DispositionToAndIsLetPass(String username, Boolean isLetPass) {
+        return letterRepository.findAllByDisposition_DispositionToAndIsLetPass(username, isLetPass);
+    }
 }

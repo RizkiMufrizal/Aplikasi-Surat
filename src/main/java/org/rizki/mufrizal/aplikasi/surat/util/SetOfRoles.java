@@ -20,4 +20,10 @@ public class SetOfRoles {
         stringSet.add("ROLE_KEPALA_BAGIAN");
         return stringSet;
     }
+
+    public static Set<String> getRoleKepalaBagian() {
+        Set<String> stringSet = new HashSet<>();
+        stringSet.add("ROLE_KEPALA_BAGIAN");
+        return stringSet;
+    }
 }

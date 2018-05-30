@@ -34,10 +34,10 @@
                     </li>
 
                     <li sec:authorize="hasRole('ROLE_KEPALA_BAGIAN')">
-                        <a th:href="@{/incomeLetter}">Surat Masuk</a>
+                        <a th:href="@{/incomeLetterHead}">Surat Masuk</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_KEPALA_BAGIAN')">
-                        <a th:href="@{/sendLetter}">Surat Keluar</a>
+                        <a th:href="@{/sendLetterHead}">Surat Keluar</a>
                     </li>
                 </ul>
             </li>

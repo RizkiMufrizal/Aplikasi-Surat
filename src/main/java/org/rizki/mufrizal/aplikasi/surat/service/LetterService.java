@@ -25,4 +25,6 @@ public interface LetterService {
     Iterable<Letter> findAllByLetPassIsTrue();
 
     Iterable<Letter> findAllByLetPassIsFalse();
+
+    Iterable<Letter> findAllByDisposition_DispositionToAndIsLetPass(String username, Boolean isLetPass);
 }

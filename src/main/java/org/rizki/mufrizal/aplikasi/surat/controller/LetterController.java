@@ -3,6 +3,7 @@ package org.rizki.mufrizal.aplikasi.surat.controller;
 import org.rizki.mufrizal.aplikasi.surat.domain.Letter;
 import org.rizki.mufrizal.aplikasi.surat.dto.LetterDto;
 import org.rizki.mufrizal.aplikasi.surat.dto.mapper.LetterToDtoMapper;
+import org.rizki.mufrizal.aplikasi.surat.helper.security.AuthenticationSessionFacade;
 import org.rizki.mufrizal.aplikasi.surat.helper.upload.StorageFileNotFoundException;
 import org.rizki.mufrizal.aplikasi.surat.helper.upload.StorageService;
 import org.rizki.mufrizal.aplikasi.surat.service.DispositionService;
@@ -45,6 +46,9 @@ public class LetterController {
 
     @Autowired
     private DispositionService dispositionService;
+
+    @Autowired
+    private AuthenticationSessionFacade authenticationSessionFacade;
 
     @GetMapping(value = "/incomeLetter")
     public String letterIncome(Model model) {
@@ -130,6 +134,18 @@ public class LetterController {
             storageService.deleteFile(letter.getLetterUpload());
         }
         return "redirect:/sendLetter";
+    }
+
+    @GetMapping(value = "/incomeLetterHead")
+    public String letterIncomeHead(Model model) {
+        model.addAttribute("letter", letterService.findAllByDisposition_DispositionToAndIsLetPass(authenticationSessionFacade.getUsername(), Boolean.TRUE));
+        return "letter_income";
+    }
+
+    @GetMapping(value = "/sendLetterHead")
+    public String letterSendHead(Model model) {
+        model.addAttribute("letter", letterService.findAllByDisposition_DispositionToAndIsLetPass(authenticationSessionFacade.getUsername(), Boolean.FALSE));
+        return "letter_send";
     }
 
     @GetMapping("/files/{filename:.+}")

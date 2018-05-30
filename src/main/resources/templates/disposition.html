@@ -40,6 +40,7 @@
                             <th>Disposisi Dari</th>
                             <th>Disposisi Kepada</th>
                             <th>Status Disposisi</th>
+                            <th>Perihal Surat</th>
                             <th>Aksi</th>
                         </tr>
                         </thead>
@@ -49,6 +50,7 @@
                             <th>Disposisi Dari</th>
                             <th>Disposisi Kepada</th>
                             <th>Status Disposisi</th>
+                            <th>Perihal Surat</th>
                             <th>Aksi</th>
                         </tr>
                         </tfoot>
@@ -58,6 +60,7 @@
                             <td th:text="${d.dispositionFrom}"></td>
                             <td th:text="${d.dispositionTo}"></td>
                             <td th:text="${d.isDisposition()}"></td>
+                            <td th:text="${d.letter.subject}"></td>
                             <td class="text-center">
                                 <a th:href="@{/editDisposition/{idDisposition}(idDisposition=${d.idDisposition})}">
                                     <button type="button" class="btn btn-success btn-sm">Ubah</button>

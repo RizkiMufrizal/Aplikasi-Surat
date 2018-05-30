@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @Author Rizki Mufrizal <mufrizalrizki@gmail.com>
@@ -59,5 +60,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Iterable<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public Iterable<User> findAllByRoles(Set<String> roles) {
+        return userRepository.findAllByRoles(roles);
     }
 }

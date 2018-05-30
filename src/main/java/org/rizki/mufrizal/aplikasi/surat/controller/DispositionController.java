@@ -8,6 +8,7 @@ import org.rizki.mufrizal.aplikasi.surat.helper.security.AuthenticationSessionFa
 import org.rizki.mufrizal.aplikasi.surat.service.DispositionService;
 import org.rizki.mufrizal.aplikasi.surat.service.LetterService;
 import org.rizki.mufrizal.aplikasi.surat.service.UserService;
+import org.rizki.mufrizal.aplikasi.surat.util.SetOfRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +54,7 @@ public class DispositionController {
     public String dispositionNew(Model model) {
         model.addAttribute("disposition", new DispositionDto());
         model.addAttribute("letter", letterService.findAllByLetPassIsTrue());
-        model.addAttribute("user", userService.findAll());
+        model.addAttribute("user", userService.findAllByRoles(SetOfRoles.getRoleKepalaBagian()));
         return "disposition_new";
     }
 
@@ -70,7 +71,7 @@ public class DispositionController {
     public String dispositionEdit(@PathVariable("idDisposition") String idDisposition, Model model) {
         model.addAttribute("disposition", dispositionToDtoMapper.dispositionToDispositionDto(dispositionService.findById(idDisposition).orElse(new Disposition())));
         model.addAttribute("letter", letterService.findAllByLetPassIsTrue());
-        model.addAttribute("user", userService.findAll());
+        model.addAttribute("user", userService.findAllByRoles(SetOfRoles.getRoleKepalaBagian()));
         return "disposition_edit";
     }
 

@@ -16,4 +16,6 @@ public interface LetterRepository extends PagingAndSortingRepository<Letter, Str
     Iterable<Letter> findAllByIsLetPassIsTrue();
 
     Iterable<Letter> findAllByIsLetPassIsFalse();
+
+    Iterable<Letter> findAllByDisposition_DispositionToAndIsLetPass(String username, Boolean isLetPass);
 }

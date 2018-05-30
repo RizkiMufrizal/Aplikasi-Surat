@@ -3,6 +3,7 @@ package org.rizki.mufrizal.aplikasi.surat.service;
 import org.rizki.mufrizal.aplikasi.surat.domain.User;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @Author Rizki Mufrizal <mufrizalrizki@gmail.com>
@@ -23,4 +24,6 @@ public interface UserService {
     Optional<User> findById(String username);
 
     Iterable<User> findAll();
+
+    Iterable<User> findAllByRoles(Set<String> roles);
 }
