@@ -25,3 +25,32 @@ spring:
         multipart:
             max-file-size: 10MB
             max-request-size: 10MB
+---
+spring:
+    profiles: heroku
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: ${JDBC_DATABASE_URL}
+        username: ${JDBC_DATABASE_USERNAME}
+        password: ${JDBC_DATABASE_PASSWORD}
+        poolName: SpringBootHikariCP
+        maximumPoolSize: 5
+        minimumIdle: 3
+        maxLifetime: 2000000
+        connectionTimeout: 30000
+        idleTimeout: 30000
+    jpa:
+        generate-ddl: true
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate: {format_sql: true}
+        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    jackson:
+        serialization:
+            indent_output: true
+    servlet:
+        multipart:
+            max-file-size: 10MB
+            max-request-size: 10MB
