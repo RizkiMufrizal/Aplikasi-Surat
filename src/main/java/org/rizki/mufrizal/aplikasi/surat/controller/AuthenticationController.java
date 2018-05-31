@@ -20,4 +20,9 @@ public class AuthenticationController {
         return "login";
     }
 
+    @GetMapping(value = "/403")
+    public String page403() {
+        return "403";
+    }
+
 }

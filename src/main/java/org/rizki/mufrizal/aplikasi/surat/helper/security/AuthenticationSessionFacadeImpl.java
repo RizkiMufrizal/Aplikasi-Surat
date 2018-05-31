@@ -26,4 +26,9 @@ public class AuthenticationSessionFacadeImpl implements AuthenticationSessionFac
         return this.getAuthentication().getName();
     }
 
+    @Override
+    public Boolean hasUserRole(String role) {
+        return this.getAuthentication().getAuthorities().stream().anyMatch(r -> r.getAuthority().equals(role));
+    }
+
 }

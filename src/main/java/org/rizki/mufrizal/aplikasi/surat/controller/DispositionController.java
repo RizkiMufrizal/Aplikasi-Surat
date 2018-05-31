@@ -10,6 +10,7 @@ import org.rizki.mufrizal.aplikasi.surat.service.LetterService;
 import org.rizki.mufrizal.aplikasi.surat.service.UserService;
 import org.rizki.mufrizal.aplikasi.surat.util.SetOfRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,12 +45,14 @@ public class DispositionController {
     @Autowired
     private AuthenticationSessionFacade authenticationSessionFacade;
 
+    @PreAuthorize("hasRole('ROLE_PIMPINAN')")
     @GetMapping(value = "/dispositions")
     public String letterIncome(Model model) {
         model.addAttribute("disposition", dispositionService.findAll());
         return "disposition";
     }
 
+    @PreAuthorize("hasRole('ROLE_PIMPINAN')")
     @GetMapping(value = "/newDisposition")
     public String dispositionNew(Model model) {
         model.addAttribute("disposition", new DispositionDto());
@@ -58,6 +61,7 @@ public class DispositionController {
         return "disposition_new";
     }
 
+    @PreAuthorize("hasRole('ROLE_PIMPINAN')")
     @PostMapping(value = "/newDisposition")
     public String dispositionSave(@ModelAttribute("disposition") DispositionDto dispositionDto) {
         dispositionDto.setDispositionFrom(authenticationSessionFacade.getUsername());
@@ -67,6 +71,7 @@ public class DispositionController {
         return "redirect:/dispositions";
     }
 
+    @PreAuthorize("hasRole('ROLE_PIMPINAN')")
     @GetMapping(value = "/editDisposition/{idDisposition}")
     public String dispositionEdit(@PathVariable("idDisposition") String idDisposition, Model model) {
         model.addAttribute("disposition", dispositionToDtoMapper.dispositionToDispositionDto(dispositionService.findById(idDisposition).orElse(new Disposition())));
@@ -75,6 +80,7 @@ public class DispositionController {
         return "disposition_edit";
     }
 
+    @PreAuthorize("hasRole('ROLE_PIMPINAN')")
     @PostMapping(value = "/editDisposition")
     public String dispositionUpdate(@ModelAttribute("disposition") DispositionDto dispositionDto) {
         dispositionDto.setDispositionFrom(authenticationSessionFacade.getUsername());
@@ -86,12 +92,14 @@ public class DispositionController {
         return "redirect:/dispositions";
     }
 
+    @PreAuthorize("hasRole('ROLE_PIMPINAN')")
     @GetMapping(value = "/deleteDisposition/{idDisposition}")
     public String dispositionDelete(@PathVariable("idDisposition") String idDisposition) {
         dispositionService.deleteDisposition(idDisposition);
         return "redirect:/dispositions";
     }
 
+    @PreAuthorize("hasRole('ROLE_KEPALA_BAGIAN')")
     @GetMapping(value = "/updateIsDisposition/{idDisposition}")
     public String updateIsDisposition(@PathVariable("idDisposition") String idDisposition) {
         dispositionService.updateIsDisposition(Boolean.TRUE, idDisposition);

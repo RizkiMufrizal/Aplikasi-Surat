@@ -15,4 +15,6 @@ public interface AuthenticationSessionFacade {
     Authentication getAuthentication();
 
     String getUsername();
+
+    Boolean hasUserRole(String role);
 }
